@@ -23,6 +23,7 @@ public class RoleBean {
 
 	@Column(length = 15, nullable = false, unique = true)
 	String roleName;
+	
     @JsonIgnore
 	@OneToMany(mappedBy = "role")
 	Set<UserBean> users;

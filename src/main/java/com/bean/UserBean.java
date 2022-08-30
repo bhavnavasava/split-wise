@@ -1,12 +1,15 @@
 package com.bean;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,7 +22,6 @@ public class UserBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer userId;
-
 	String firstName;
 	String email;
 	String password;
@@ -33,9 +35,18 @@ public class UserBean {
 	@OneToMany(mappedBy = "users")
 	List<AccountBean> accounts;
 	
-	@OneToMany
+	@ManyToMany(mappedBy = "users")
+	Set<FriendsBean> friends;
+
 	@JsonIgnore
-	List<FriendsBean> friends;
+	@OneToMany(mappedBy = "users")
+	List<ExpenseBean> expenses;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "users")
+	List<GroupBean> groups;
+	
+	String authToken;
 
 	public List<AccountBean> getAccounts() {
 		return accounts;
@@ -93,4 +104,33 @@ public class UserBean {
 		this.role = role;
 	}
 
+	public List<ExpenseBean> getExpenses() {
+		return expenses;
+	}
+
+	public void setExpenses(List<ExpenseBean> expenses) {
+		this.expenses = expenses;
+	}
+
+
+	public Set<FriendsBean> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<FriendsBean> friends) {
+		this.friends = friends;
+	}
+
+	public String getAuthToken() {
+		return authToken;
+	}
+
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
+	}
+
+	
+	
+
+	
 }

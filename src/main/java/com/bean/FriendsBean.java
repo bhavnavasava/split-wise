@@ -1,16 +1,18 @@
 package com.bean;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "friends_table")
+@Table(name = "friends")
 public class FriendsBean {
 
 	@Id
@@ -19,9 +21,11 @@ public class FriendsBean {
 	String friendName;
 	Integer mobileNo;
 	
-	@OneToOne
-	@JoinColumn(name = "userId")
-	UserBean users;
+	@ManyToMany
+	@JoinTable(name = "user_friends", joinColumns = { @JoinColumn(name = "userId") }, inverseJoinColumns = {
+			@JoinColumn(name = "friendId") })
+	Set<UserBean> users;
+
 
 	public Integer getFriendId() {
 		return friendId;
@@ -47,11 +51,14 @@ public class FriendsBean {
 		this.mobileNo = mobileNo;
 	}
 
-	public UserBean getUsers() {
+	public Set<UserBean> getUsers() {
 		return users;
 	}
 
-	public void setUsers(UserBean users) {
+	public void setUsers(Set<UserBean> users) {
 		this.users = users;
 	}
+
+	
+	
 }

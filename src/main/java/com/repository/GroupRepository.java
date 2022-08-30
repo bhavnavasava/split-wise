@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.bean.ExpenseBean;
+import com.bean.GroupBean;
 
 @Repository
-public interface ExpenseRepository extends CrudRepository<ExpenseBean, Integer> {
-	
-	List<ExpenseBean> findAll();
+public interface GroupRepository extends CrudRepository<GroupBean, Integer> {
+
+	List<GroupBean> findAll();
 }

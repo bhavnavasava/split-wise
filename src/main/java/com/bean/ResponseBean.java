@@ -15,5 +15,4 @@ public class ResponseBean<T> {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-
 }
